@@ -10,7 +10,9 @@
 # Ejercicios con archivos
 
 import csv
-
+import os
+os.system('cls')
+# Me gusta limpiar la consola antes de empezar el codigo
 
 def ej3():
     print('Ejercicio de archivos CSV 1º')
@@ -27,7 +29,20 @@ def ej3():
     # para cumplir con el enunciado del ejercicio
 
     # Comenzar aquí, recuerde el identado dentro de esta funcion
-    
+
+    csvfile = open(archivo,'r')
+    data = list(csv.DictReader(csvfile))
+    csvfile.close()
+
+    tornillos = 0
+
+    for elemento in data:
+        tornillos += int(elemento['tornillos'])
+
+
+
+    print(f'Stock de tornillos: {tornillos}')
+
 
 
 def ej4():
@@ -48,8 +63,33 @@ def ej4():
 
     # Comenzar aquí, recuerde el identado dentro de esta funcion
 
+    with open(archivo, 'r') as csvfile:
+        data = list(csv.DictReader(csvfile))
+
+    cantidad_2_ambientes = 0
+    cantidad_3_ambientes = 0
+
+    for propiedad in data:
+
+        try:
+            if propiedad['ambientes'] == '2':
+                cantidad_2_ambientes += 1
+                # print(propiedad)
+
+            elif propiedad['ambientes'] == '3':
+                cantidad_3_ambientes += 1
+                # print(propiedad)
+
+        except:
+            print(f'El dueño no detalló la cantidad de ambientes de {propiedad}')
+
+    print(f'Cantidad de propiedades 2 ambientes: {cantidad_2_ambientes}')
+    print(f'Cantidad de propiedades 3 ambientes: {cantidad_3_ambientes}')
+
 
 if __name__ == '__main__':
     print("Bienvenidos a otra clase de Inove con Python")
+    print('\n')
     ej3()
+    print('\n')
     ej4()
